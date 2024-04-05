@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<th:block th:fragment="navBibliotheque">
+
+    <nav class="sidebar sidebar-offcanvas" id="sidebar" >
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{dashboard}">
+                    <i class="bi bi-arrow-left-circle-fill menu-icon "></i>
+                    <span class="menu-title">Retour à l'ENT</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{gestionbibliotheque}">
+                    <i class="icon-grid menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:if="${session.authorithies[0].authority =='Etudiant' }" th:href="@{profil}">
+                    <i class="bi bi-people-fill menu-icon"></i>
+                    <span class="menu-title">Mon Profil</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:if="${session.authorithies[0].authority =='Etudiant' }" th:href="@{parcours}"  >
+                    <i class="bi bi-list-columns-reverse menu-icon"></i>
+                    <span class="menu-title">Mon Parcours </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <span class="app">Impression</span>
+            </li>
+            <li class="nav-item" th:if="${session.authorithies[0].authority =='Admin' }">
+                <a class="nav-link"  data-toggle="modal" data-target="#bilanAbsModal" href="#" aria-expanded="false" aria-controls="ui-basic" >
+                    <i class="bi bi-people-fill menu-icon"></i>
+                    <span class="menu-title">Bilan des documents</span>
+                </a>
+            </li>
+
+            <li class="nav-item" th:if="${session.authorithies[0].authority =='Admin' }">
+                <a class="nav-link" data-toggle="collapse" href="#etudiant" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="bi bi-people-fill menu-icon"></i>
+                    <span class="menu-title">Adherants</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="etudiant">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#carteModal">Ajouter un Adherant</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#classeModal">Liste des Adherants</a></li>
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#pv" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Documents</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="pv">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link"  href="#" data-toggle="modal" data-target="#pvSynModal" th:if="${session.authorithies[0].authority =='Admin' }">Ajouter un document</a></li>
+                        <li class="nav-item"> <a class="nav-link" th:href="@{listeDocument}"  data-target="">Liste des documents</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#AttestationModal" th:if="${session.authorithies[0].authority =='Admin' }">Ajouter un pret </a></li>
+                        <li class="nav-item"> <a class="nav-link" th:href="@{listePret}" data-toggle="" data-target="" >liste des prets</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item" >
+                <a class="nav-link" data-toggle="collapse" href="#categorie" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="bi bi-file-check-fill menu-icon"></i>
+                    <span class="menu-title" >Categories</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="categorie">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#RelevéModal" th:if="${session.authorithies[0].authority =='Admin' }">Ajouter une categorie</a></li>
+                        <li class="nav-item"> <a class="nav-link" th:href="@{listeCategorie}"  data-target="" >Liste des categories</a></li>
+                    </ul>
+                </div>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- partial -->
+
+
+</th:block>
+
+</html>

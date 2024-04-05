@@ -1,0 +1,363 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+<th:block th:fragment="modalsBibliotheques">
+
+  <!-- ajout de document-->
+  <div class="modal fade" id="pvSynModal" tabindex="-1" aria-labelledby="pvSynModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="pvSyn">Ajouter un document</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form  class="row justify-content-center gap-3" th:action="@{/imprimerPVSynthese}" th:method="post" th:object="${pvsynthese}">
+            <div class="col-lg-12 row flex-column">
+              <label for="classes" class="form-label">Sélectionner la categorie</label>
+              <select name="class" id="classes" class="form-select" th:field="*{codeClasse}">
+                <option th:each="classe: ${classes}" th:value="${classe.code}" th:text="${classe.libelle}">INGE 1 - Tronc commun</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="classes" class="form-label">Sélectionner le status</label>
+              <select name="class" class="form-select">
+                <option>disponible</option>
+                <option>non disponible</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="classes" class="form-label">Sélectionner le type du document</label>
+              <select name="class" class="form-select">
+                <option>physiqque</option>
+                <option>numerique</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez l'isbn du document</label>
+              <input name="dateJury" enable="false" type="number" class="form-control" value="" >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez le nom du document</label>
+              <input name="dateJury" enable="false" type="text" class="form-control" id="" value="" >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez le titre du document</label>
+              <input name="dateJury" enable="false" type="text" class="form-control"  value="">
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez le prix unitaire du document</label>
+              <input name="dateJury" enable="false" type="text" class="form-control"  value="">
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez le fichier document</label>
+              <input name="dateJury" enable="false" type="file" class="form-control"  value="">
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez la photo de couverture du document</label>
+              <input name="dateJury" enable="false" type="text" class="form-control"  value="">
+            </div>
+
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Date d'edition du document</label>
+              <input name="dateJury" enable="false" type="date" class="form-control" id="dateJury" value="" th:field="*{dateJury}">
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin ajout document -->
+
+  <!-- pret de document-->
+  <div class="modal fade" id="CertModal" tabindex="-1" aria-labelledby="CertModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modaltitle">Demandez un pret de document </h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form  class="row justify-content-center" th:action="@{/imprimercertificat}" th:method="post" th:object="${releve}">
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">isbn du document</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="text" class="form-control" id="matricules" value="">
+              </div>
+            </div>
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">nom du document</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="text" class="form-control" value="">
+              </div>
+            </div>
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">auteur du document</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="text" class="form-control"  value="">
+              </div>
+            </div>
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">motif du pret</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="text" class="form-control" value="">
+              </div>
+            </div>
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">date d'emprunt du document</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="date" class="form-control" value="">
+              </div>
+            </div>
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">date de restitution du document</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="date" class="form-control" value="">
+              </div>
+            </div>
+
+            <div class="col-lg-12 row flex-column">
+              <label for="year" class="form-label">Sélectionner la categorie du document</label>
+              <select name="year" id="year" class="form-select" th:field="*{dateString}">
+                <option value=""th:each="anneeAcademique: ${anneeacademiques}" th:value="${anneeAcademique.dateDebut}" th:text="${anneeAcademique.libelle}">2022 - 2023</option>
+              </select>
+            </div>
+            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
+              <label for="matricules" class="form-label">etat du document</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="matricules" type="text" class="form-control" value="">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Imprimer</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--Fin modal Certif scolarité-->
+
+  <!-- Modal for releve  -->
+  <div class="modal fade" id="RelevéModal" tabindex="-1" aria-labelledby="RelevéModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cat">Ajouter une categorie </h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row justify-content-center gap-3" th:action="@{ajoutCategorie}" th:method="post">
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez le nom de la categorie</label>
+              <input name="nom" enable="false" type="text" class="form-control" required >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez la couleur de la categorie</label>
+              <input name="couleur" enable="false" type="text" class="form-control" required >
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End Modal for  releve  -->
+
+  <!-- Modal ajouter pret -->
+  <div class="modal fade" id="AttestationModal" tabindex="-1" aria-labelledby="AttestationModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-titleAttestation">Génerer un pret</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" class="row justify-content-center" th:action="@{/imprimerDiplomeOuAttestation}" th:method="post" th:object="${attestationDiplome}">
+            <div class="col-lg-12 row flex-column" >
+              <label for="class" class="form-label">Sélectionner la classe</label>
+              <select name="class" id="classAttestation" class="form-select" th:field="*{codeClasse}">
+                <option th:each="classe: ${classes}" th:value="${classe.code}" th:text="${classe.libelle}">INGE 1 - Tronc commun</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="year" class="form-label">Sélectionner l'année académique</label>
+              <select name="year" id="yearAttestation" class="form-select" th:field="*{dateJury}">
+                <option th:each="anneeAcademique: ${anneeacademiques}" th:value="${anneeAcademique.dateDebut}" th:text="${anneeAcademique.libelle}">2022 - 2023</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row">
+              <div class="col-lg-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="type" th:field="*{typeEtat}" id="typeDiplome" value="diplome" checked>
+                  <label for="typeDiplome" class="form-check-label">Diplôme</label>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="type" th:field="*{typeEtat}" id="typeAttestation" value="attestation">
+                  <label for="typeAttestation" class="form-check-label">Attestation</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Imprimer</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End Modal for attestation -->
+
+  <!-- Modal for absenses hours -->
+  <div class="modal fade" id="bilanAbsModal" tabindex="-1" aria-labelledby="bilanAbsModal" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bilanAbseModal">Générer le  bilan d'absence</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" class="row justify-content-center" th:action="@{/imprimerFicheAbsence}" th:method="post" th:object="${ficheAbsence}">
+            <div class="col-lg-12 row flex-column">
+              <label for="class" class="form-label">Sélectionner la classe</label>
+              <select name="class" id="classAbsence" class="form-select" th:field="*{codeClasse}" >
+                <option th:each="classe: ${classes}" th:value="${classe.code}" th:text="${classe.libelle}">INGE 1 - Tronc commun</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="year" class="form-label">Sélectionner l'année académique</label>
+              <select name="year" id="yearAbsence" class="form-select" th:field="*{debutAnneeAcademique}">
+                <option value=""th:each="anneeAcademique: ${anneeacademiques}" th:value="${anneeAcademique.dateDebut}" th:text="${anneeAcademique.libelle}">2022 - 2023</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="semester" class="form-label">Sélectionner le semestre</label>
+              <select name="semester" id="semesterabs" class="form-select" th:field="*{semestre}">
+                <option th:each="semestre: ${semestres}" th:value="${semestre.libelle}" th:text="${semestre.description}">2022 - 2023</option>
+              </select>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <div class="col-lg-12 row flex-column">
+                <label for="datedeb" class="form-label">Date de Debut</label>
+                <input type="date" name="datedeb" id="datedeb" class="form-control" th:field="*{dateDebut}">
+              </div>
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <div class="col-lg-12 row flex-column">
+                <label for="datefin" class="form-label">Date de Fin</label>
+                <input type="date" name="datefin" id="datefin" class="form-control" th:field="*{dateFin}">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Imprimer</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End Modal for absenses hours -->
+
+  <!--  liste des étudiants -->
+  <div class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="classeModal">liste des étudiants</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1>liste</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <input type="submit" class="btn btn-primary" value="Envoyer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- liste des étudiants -->
+
+
+  <!-- Ajouter un etudiant -->
+  <div class="modal fade" id="carteModal" tabindex="-1" aria-labelledby="carteModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-titlecarte">Ajouter un etudiant </h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/Imprimercarte}" th:method="post" th:object="${carteEtudiant}" class="row justify-content-center gap-3">
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez votre email</label>
+              <input name="dateJury" enable="false" type="email" class="form-control" value="" >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez mot de passe</label>
+              <input name="dateJury" enable="false" type="password" class="form-control" value="" >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez votre numero de telephone</label>
+              <input name="dateJury" enable="false" type="number" class="form-control" value="" >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez votre nom d'utilisateur</label>
+              <input name="dateJury" enable="false" type="number" class="form-control" value="" >
+            </div>
+            <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez votre photo de profil</label>
+              <input name="dateJury" enable="false" type="text" class="form-control" value="" >
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End Modal for carte d'etudiant  -->
+
+  <!-- ajouter categorie -->
+<!--  <div class="modal fade" id="categorie" tabindex="-1"  aria-labelledby="RelevéModal" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title">Ajouter une categorie </h5>-->
+<!--          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <form class="row justify-content-center gap-3">-->
+<!--            <div class="col-lg-12 row flex-column">-->
+<!--              <label for="dateJury" class="form-label">Entrez le nom de la categorie</label>-->
+<!--              <input name="dateJury" enable="false" type="text" class="form-control" value="" >-->
+<!--            </div>-->
+<!--            <div class="col-lg-12 row flex-column">-->
+<!--              <label for="dateJury" class="form-label">Entrez la couleur de la categorie</label>-->
+<!--              <input name="dateJury" enable="false" type="text" class="form-control" value="" >-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="submit" class="btn btn-primary">Ajouter</button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+  <!-- fin ajouter categorie -->
+</th:block>
+</html>
