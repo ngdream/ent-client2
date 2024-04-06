@@ -87,10 +87,6 @@
                                         <tr th:each="pret : ${prets}">
 
                                             <td th:text="${pret.id}" th:if="${session.authorithies[0].authority == 'Admin' }"></td>
-                                            <td th:text="${pret.matricule_etudiant}"></td>
-                                            <td th:text="${pret.date_pret}"></td>
-                                            <td th:text="${pret.date_retour}"></td>
-                                            <td th:text="${pret.date_limite_retour}"></td>
                                             <td>
                                                 <button class="btn btn-primary"  th:if="${session.authorithies[0].authority == 'Admin' }">
                                                     <a class="h4 mr-3 text-white">Edit</a>
@@ -106,6 +102,25 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>

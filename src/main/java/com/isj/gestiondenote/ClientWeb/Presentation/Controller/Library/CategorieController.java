@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.isj.gestiondenote.ClientWeb.Model.ModelBiblio.Categorie;
-import com.isj.gestiondenote.ClientWeb.utils.test.Modal;
 import com.isj.gestiondenote.ClientWeb.utils.test.ModalWithHttpHeader;
 import com.isj.gestiondenote.ClientWeb.utils.test.URL;
 
+//controlleur  pour gerer les categories de livres dans une bibliothèque
 @Controller
 public class CategorieController {
+
+    // cette route nous permettra de lister toutes les categories disponible dans la
+    // bibliotheque
     @GetMapping("/listeCategorie")
     public String listeCategorie(Model model, HttpSession session) {
         ModalWithHttpHeader.model(model, session);
-        Modal.model(model);
         String accessToken = (String) session.getAttribute("accessToken");
         model.addAttribute("accessToken", accessToken);
         RestTemplate restTemplate = new RestTemplate();
@@ -30,9 +32,9 @@ public class CategorieController {
         model.addAttribute("categories", categories);
 
         return "pages/gestion-bibliotheque/liste-des-categories";
-
     }
 
+    // nous supprimons une categorie
     @GetMapping("/supprimerCategorie/{id}")
     public String supprimerCategorie(@PathVariable Integer id, Model model) {
         RestTemplate restTemplate = new RestTemplate();
@@ -41,14 +43,11 @@ public class CategorieController {
         return "redirect:/listeCategorie";
     }
 
+    // nous ajoutons une nouvelle catégorie
     @PostMapping("/ajoutCategorie")
     public String ajoutCategorie(Model model, @ModelAttribute Categorie object, HttpSession session) {
-        Modal.model(model);
         RestTemplate restTemplate = new RestTemplate();
-
-        Object[] categories = restTemplate.postForObject(URL.BASE_URL_BIB + "/categories", object, Object[].class);
-        System.out.print(categories);
-        model.addAttribute("categories", categories);
+        restTemplate.postForObject(URL.BASE_URL_BIB + "/categories", object, Object[].class);
         return "redirect:/listeCategorie";
     }
 }

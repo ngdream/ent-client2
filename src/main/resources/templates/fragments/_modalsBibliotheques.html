@@ -11,55 +11,37 @@
         </div>
         <div class="modal-body">
 
-          <form  class="row justify-content-center gap-3" th:action="@{/imprimerPVSynthese}" th:method="post" th:object="${pvsynthese}">
-            <div class="col-lg-12 row flex-column">
-              <label for="classes" class="form-label">Sélectionner la categorie</label>
-              <select name="class" id="classes" class="form-select" th:field="*{codeClasse}">
-                <option th:each="classe: ${classes}" th:value="${classe.code}" th:text="${classe.libelle}">INGE 1 - Tronc commun</option>
-              </select>
-            </div>
-            <div class="col-lg-12 row flex-column">
-              <label for="classes" class="form-label">Sélectionner le status</label>
-              <select name="class" class="form-select">
-                <option>disponible</option>
-                <option>non disponible</option>
-              </select>
+          <form  class="row justify-content-center gap-3" th:action="@{ajoutDocument}" th:method="post" enctype="multipart/form-data" >
+               <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez la quantité</label>
+              <input  enable="false" type="number" class="form-control"  value="" name="quantite">
             </div>
             <div class="col-lg-12 row flex-column">
               <label for="classes" class="form-label">Sélectionner le type du document</label>
-              <select name="class" class="form-select">
-                <option>physiqque</option>
-                <option>numerique</option>
+              <select  class="form-select">
+                <option th:each="category : ${categories}" th:text="${category.nom}"></option>
               </select>
             </div>
             <div class="col-lg-12 row flex-column">
-              <label for="dateJury" class="form-label">Entrez l'isbn du document</label>
-              <input name="dateJury" enable="false" type="number" class="form-control" value="" >
-            </div>
-            <div class="col-lg-12 row flex-column">
               <label for="dateJury" class="form-label">Entrez le nom du document</label>
-              <input name="dateJury" enable="false" type="text" class="form-control" id="" value="" >
-            </div>
-            <div class="col-lg-12 row flex-column">
-              <label for="dateJury" class="form-label">Entrez le titre du document</label>
-              <input name="dateJury" enable="false" type="text" class="form-control"  value="">
+              <input  enable="false" type="text" class="form-control"  name="nom" />
             </div>
             <div class="col-lg-12 row flex-column">
               <label for="dateJury" class="form-label">Entrez le prix unitaire du document</label>
-              <input name="dateJury" enable="false" type="text" class="form-control"  value="">
+              <input  enable="false" type="number" class="form-control"  name="pricing" >
             </div>
             <div class="col-lg-12 row flex-column">
-              <label for="dateJury" class="form-label">Entrez le fichier document</label>
-              <input name="dateJury" enable="false" type="file" class="form-control"  value="">
+              <label  class="form-label" >Entrez le fichier document</label>
+              <input   type="file" class="form-control" name="file" >
             </div>
             <div class="col-lg-12 row flex-column">
-              <label for="dateJury" class="form-label">Entrez la photo de couverture du document</label>
-              <input name="dateJury" enable="false" type="text" class="form-control"  value="">
+              <label  class="form-label"> Entrez la photo de couverture du document</label>
+              <input   type="file" class="form-control" name="image" />
             </div>
 
             <div class="col-lg-12 row flex-column">
               <label for="dateJury" class="form-label">Date d'edition du document</label>
-              <input name="dateJury" enable="false" type="date" class="form-control" id="dateJury" value="" th:field="*{dateJury}">
+              <input  enable="false" type="date" class="form-control" id="dateJury" value="" >
             </div>
 
             <div class="modal-footer">
@@ -72,75 +54,6 @@
   </div>
   <!-- fin ajout document -->
 
-  <!-- pret de document-->
-  <div class="modal fade" id="CertModal" tabindex="-1" aria-labelledby="CertModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modaltitle">Demandez un pret de document </h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form  class="row justify-content-center" th:action="@{/imprimercertificat}" th:method="post" th:object="${releve}">
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">isbn du document</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="text" class="form-control" id="matricules" value="">
-              </div>
-            </div>
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">nom du document</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="text" class="form-control" value="">
-              </div>
-            </div>
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">auteur du document</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="text" class="form-control"  value="">
-              </div>
-            </div>
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">motif du pret</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="text" class="form-control" value="">
-              </div>
-            </div>
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">date d'emprunt du document</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="date" class="form-control" value="">
-              </div>
-            </div>
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">date de restitution du document</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="date" class="form-control" value="">
-              </div>
-            </div>
-
-            <div class="col-lg-12 row flex-column">
-              <label for="year" class="form-label">Sélectionner la categorie du document</label>
-              <select name="year" id="year" class="form-select" th:field="*{dateString}">
-                <option value=""th:each="anneeAcademique: ${anneeacademiques}" th:value="${anneeAcademique.dateDebut}" th:text="${anneeAcademique.libelle}">2022 - 2023</option>
-              </select>
-            </div>
-            <div class="row mb-3" th:if="${session.authorithies[0].authority =='Admin' }" >
-              <label for="matricules" class="form-label">etat du document</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="matricules" type="text" class="form-control" value="">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Imprimer</button>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!--Fin modal Certif scolarité-->
 
   <!-- Modal for releve  -->
   <div class="modal fade" id="RelevéModal" tabindex="-1" aria-labelledby="RelevéModal" aria-hidden="true">
@@ -180,35 +93,27 @@
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="" class="row justify-content-center" th:action="@{/imprimerDiplomeOuAttestation}" th:method="post" th:object="${attestationDiplome}">
-            <div class="col-lg-12 row flex-column" >
-              <label for="class" class="form-label">Sélectionner la classe</label>
-              <select name="class" id="classAttestation" class="form-select" th:field="*{codeClasse}">
-                <option th:each="classe: ${classes}" th:value="${classe.code}" th:text="${classe.libelle}">INGE 1 - Tronc commun</option>
-              </select>
+          <form action="" class="row justify-content-center" th:action="@{/ajoutPret}" th:method="post" th:object="${attestationDiplome}">
+             <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez l'identifiant du preteur </label>
+              <input name="nom" enable="false" type="text" class="form-control" required >
             </div>
+             <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez la liste des document a preter (separé par une ,)</label>
+              <input name="booksList" enable="false" type="text" class="form-control" required >
+            </div>
+
+              <div class="col-lg-12 row flex-column">
+              <label for="dateJury" class="form-label">Entrez la date limite</label>
+              <input name="limitBackDate" enable="false" type="date" class="form-control" required >
+            </div>
+
             <div class="col-lg-12 row flex-column">
-              <label for="year" class="form-label">Sélectionner l'année académique</label>
-              <select name="year" id="yearAttestation" class="form-select" th:field="*{dateJury}">
-                <option th:each="anneeAcademique: ${anneeacademiques}" th:value="${anneeAcademique.dateDebut}" th:text="${anneeAcademique.libelle}">2022 - 2023</option>
-              </select>
-            </div>
-            <div class="col-lg-12 row">
-              <div class="col-lg-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="type" th:field="*{typeEtat}" id="typeDiplome" value="diplome" checked>
-                  <label for="typeDiplome" class="form-check-label">Diplôme</label>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="type" th:field="*{typeEtat}" id="typeAttestation" value="attestation">
-                  <label for="typeAttestation" class="form-check-label">Attestation</label>
-                </div>
-              </div>
+              <label for="dateJury" class="form-label">Entrez la date de retour</label>
+              <input name="backDate" enable="false" type="date" class="form-control" required >
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Imprimer</button>
+              <button type="submit" class="btn btn-primary">creer un pret</button>
             </div>
           </form>
         </div>

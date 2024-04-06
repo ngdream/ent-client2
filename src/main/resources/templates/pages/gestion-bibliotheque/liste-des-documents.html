@@ -81,11 +81,10 @@
                                     <table id="table_id"  class="table table-hover table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>nom du document</th>
+                                            <th>titre du document</th>
                                             <th> Categorie </th>
                                             <th>prix</th>
                                             <th>status</th>
-                                            <th>titre</th>
                                             <th>quantite</th>
                                             <th>Actions</th>
                                         </tr>
@@ -93,17 +92,20 @@
                                         <tbody>
                                         <tr th:each="document : ${documents}">
                                             <td th:text="${document.nom}"></td>
-                                            <td th:text="${document.categorie}"></td>
-                                            <td th:text="${document.prix}"></td>
-                                            <td th:text="${document.status}"></td>
-                                            <td th:text="${document.titre}"></td>
-                                            <td th:text="${document.quantite}"></td>
+                                            <td >non specifié</td>
+                                           <td th:text="${document.pricing}"></td>
+                                          <td th:text="${document.quantite}"></td>
+                                        <td th:text="${document.quantite}"></td>
+
+
+
+                                       
                                             <td>
                                                 <button class="btn btn-primary" th:if="${session.authorithies[0].authority == 'Admin' }">
                                                     <a class="h4 mr-3 text-white">Edit</a>
                                                 </button>
                                                 <button class="btn btn-secondary">
-                                                    <a class="h4 mr-3 text-white">View</a>
+                                                    <a class="h4 mr-3 text-white" th:href="${'http://localhost:8080/api/library/ouvrages/'+document.id+'/download'}">telechargé</a>
                                                 </button>
                                                 <button class="btn btn-danger" th:if="${session.authorithies[0].authority == 'Admin' }">
                                                     <a class="h4 mr-3 m-5 text-white" th:href="@{supprimerDocument/{id}(id=${document.id})}">Delete</a>
